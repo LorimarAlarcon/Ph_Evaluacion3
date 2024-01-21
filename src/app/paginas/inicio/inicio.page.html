@@ -1,0 +1,49 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Destinos Vacacionales</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  
+  <ion-searchbar [debounce]="1000" (ionInput)="handleInput($event)"></ion-searchbar>
+
+  <ion-list *ngIf="destinos.length > 0">
+    <ion-item *ngFor="let destino of destinos">
+      <ion-img [src]="destino.imagen" alt="{{ destino.nombre }} Image"></ion-img>
+      <ion-label>
+        <h2>{{ destino.nombre }} | {{ destino.direccion }}</h2>
+      </ion-label>
+      <ion-buttons slot="end">
+        <ion-button (click)="toggleDestinoDeseado(destino)">
+          <ion-icon [name]="esDestinoFavorito(destino) ? 'heart-sharp' : 'heart-outline'"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+    </ion-item>
+  </ion-list>
+
+  <ion-list *ngIf="listaFavoritosService.destinosDeseados.length > 0">
+    <ion-item-divider>
+      <ion-label>Favoritos</ion-label>
+    </ion-item-divider>
+    <ion-item *ngFor="let destino of listaFavoritosService.destinosDeseados let i = index" class="imagen-lista">
+      <ion-img [src]="destino.imagen" alt="{{ destino.nombre }} Image"></ion-img>
+      <ion-label>
+        <h3>{{ destino.nombre }} - <strong>{{ destino.direccion }}</strong></h3>
+      </ion-label>
+      <ion-buttons slot="end">
+        <ion-button (click)="abrirModal(destino, montos.get(destino))" class="avion-button">
+          <ion-icon name="airplane-outline"></ion-icon>
+          <ion-label *ngIf="montos.get(destino)">{{ (montos.get(destino)) | currency }}</ion-label>
+        </ion-button>
+        <ion-button (click)="capturarFoto(destino)">
+          <ion-icon name="camera-outline"></ion-icon>
+        </ion-button>  
+        <ion-button (click)="confirmarEliminarDestino(destino)">
+          <ion-icon name="trash-outline"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+    </ion-item>
+  </ion-list>
+
+</ion-content>

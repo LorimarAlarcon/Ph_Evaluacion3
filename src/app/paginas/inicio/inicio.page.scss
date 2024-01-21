@@ -1,0 +1,17 @@
+ion-img::part(image) {
+  width: 100px; 
+  height: 100px; 
+  object-fit: cover;
+  object-position: center; 
+  margin-right: 20px;
+}
+
+.imagen-lista {
+    ion-img {
+      margin: 5px;
+    }
+  }
+
+.avion-button ion-icon {
+    margin-right: 8px;
+}

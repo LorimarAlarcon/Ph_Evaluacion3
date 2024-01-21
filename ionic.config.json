@@ -1,0 +1,7 @@
+{
+  "name": "hibridra-u3",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}
